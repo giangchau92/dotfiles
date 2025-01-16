@@ -34,7 +34,7 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),
         }),
@@ -116,21 +116,6 @@ return {
       vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-      -- list all methods in a file
-      -- working with go confirmed, don't know about other, keep changing as necessary
-      vim.keymap.set("n", "<leader>fm", function()
-        local filetype = vim.bo.filetype
-        local symbols_map = {
-          python = "function",
-          javascript = "function",
-          typescript = "function",
-          java = "class",
-          lua = "function",
-          go = { "method", "struct", "interface" },
-        }
-        local symbols = symbols_map[filetype] or "function"
-        require("telescope.builtin").lsp_document_symbols({ symbols = symbols })
-      end, {})
     end,
   },
 }

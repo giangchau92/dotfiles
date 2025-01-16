@@ -24,12 +24,13 @@ keymap.set("n", "sj", "<C-w>j")
 keymap.set("n", "sl", "<C-w>l")
 
 keymap.set('v', '<C-c>', '"+y') -- Copy
+keymap.set('v', '<D-x>', '"+x') -- Copy
 keymap.set('i', '<A-BS>', '<C-w>') -- Delete
 keymap.set('c', '<A-BS>', '<C-w>') -- Delete
 
 -- Do things without affecting the registers
-keymap.set("n", "x", '"_x', opts)
-keymap.set("v", "x", '"_x', opts)
+-- keymap.set("n", "x", '"_x', opts)
+-- keymap.set("v", "x", '"_x', opts)
 keymap.set("n", "d", '"_d', opts)
 keymap.set("v", "d", '"_d', opts)
 keymap.set("n", "c", '"_c', opts)
@@ -70,12 +71,9 @@ keymap.del("n", "<leader>`")
 keymap.del("n", "<leader>cm")
 keymap.del("n", "<leader>gb")
 
-
-local which_key = require("which-key")
-which_key.add({
-  w = nil,
-}, { prefix = "<leader>g" })
-
+-- move selected lines
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 
 
