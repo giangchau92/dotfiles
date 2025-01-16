@@ -8,29 +8,6 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
     keys = {
-      -- {
-      --   "<leader>fP",
-      --   function()
-      --     require("telescope.builtin").find_files({
-      --       cwd = require("lazy.core.config").options.root,
-      --     })
-      --   end,
-      --   desc = "Find Plugin File",
-      -- },
-      {
-        "<Leader><space>",
-        function()
-          local builtin = require("telescope.builtin")
-          builtin.find_files({
-            no_ignore = false,
-            -- { "LazyVim/LazyVim", opts = { extras = { ["editor.telescope"] = false } } },
-            hidden = true,
-          })
-        end,
-        desc = "Lists files in your current working directory, respects .gitignore",
-        noremap = true,
-        silent = true,
-      },
       {
         "<leader>bs",
         function()
@@ -43,28 +20,15 @@ return {
         noremap = true,
         silent = true,
       },
-
-      -- {
-      --   ";f",
-      --   function()
-      --     local builtin = require("telescope.builtin")
-      --     builtin.find_files({
-      --       no_ignore = false,
-      --       { "LazyVim/LazyVim", opts = { extras = { ["editor.telescope"] = false } } },
-      --       hidden = true,
-      --     })
-      --   end,
-      --   desc = "Lists files in your current working directory, respects .gitignore",
-      -- },
       {
-        ";r",
+        "fs",
         function()
           local builtin = require("telescope.builtin")
           builtin.live_grep({
             additional_args = { "--hidden" },
           })
         end,
-        desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+        desc = "Search string in project, respects .gitignore",
       },
       {
         "\\\\",
@@ -74,14 +38,6 @@ return {
         end,
         desc = "Lists open buffers",
       },
-      -- {
-      --   ";t",
-      --   function()
-      --     local builtin = require("telescope.builtin")
-      --     builtin.help_tags()
-      --   end,
-      --   desc = "Lists available help tags and opens a new window with the relevant help info on <cr>",
-      -- },
       {
         ";;",
         function()
@@ -91,22 +47,14 @@ return {
         desc = "Resume the previous telescope picker",
       },
       {
-        ";e",
+        "de",
         function()
           local builtin = require("telescope.builtin")
           builtin.diagnostics()
         end,
-        desc = "Lists Diagnostics for all open buffers or a specific buffer",
+        desc = "Lists Diagnostics for all open buffers",
       },
-      {
-        ";s",
-        function()
-          local builtin = require("telescope.builtin")
-          builtin.treesitter()
-        end,
-        desc = "Lists Function names, variables, from Treesitter",
-      },
-      {
+      --[[ {
         ";f",
         function()
           local telescope = require("telescope")
@@ -127,7 +75,7 @@ return {
           })
         end,
         desc = "Open File Browser with the path of the current buffer",
-      },
+      }, ]]
     },
     config = function(_, opts)
       local telescope = require("telescope")
@@ -203,13 +151,6 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("file_browser")
 
-      vim.keymap.set("n", "<Leader><space>", function()
-        require("telescope.builtin").find_files({
-          sorting_strategy = "ascending",
-          path_display = { "smart" }, -- Show shortened paths
-          follow = true, -- Follow symlinks
-        })
-      end, { desc = "Find files with file names prioritized", noremap = true, silent = true })
     end,
   },
 }

@@ -23,10 +23,10 @@ keymap.set("n", "sk", "<C-w>k")
 keymap.set("n", "sj", "<C-w>j")
 keymap.set("n", "sl", "<C-w>l")
 
-keymap.set('v', '<C-c>', '"+y') -- Copy
-keymap.set('v', '<D-x>', '"+x') -- Copy
-keymap.set('i', '<A-BS>', '<C-w>') -- Delete
-keymap.set('c', '<A-BS>', '<C-w>') -- Delete
+keymap.set("v", "<C-c>", '"+y') -- Copy
+keymap.set("v", "<D-x>", '"+x') -- Copy
+keymap.set("i", "<A-BS>", "<C-w>") -- Delete
+keymap.set("c", "<A-BS>", "<C-w>") -- Delete
 
 -- Do things without affecting the registers
 -- keymap.set("n", "x", '"_x', opts)
@@ -35,8 +35,6 @@ keymap.set("n", "d", '"_d', opts)
 keymap.set("v", "d", '"_d', opts)
 keymap.set("n", "c", '"_c', opts)
 keymap.set("v", "c", '"_c', opts)
-
-
 
 -- Resize window
 keymap.set("n", "<C-w><left>", "<C-w><")
@@ -54,11 +52,10 @@ keymap.set("n", "<C-[>", "<C-o>", opts)
 keymap.set("n", "<C-d>", vim.lsp.buf.definition, { desc = "Go to definition", noremap = true, silent = true })
 
 -- Scrolling
-keymap.set("n", "<C-j>", "5<C-e>", { desc = "Scrolling down", noremap = true, silent = true });
-keymap.set("n", "<C-k>", "5<C-y>", { desc = "Scrolling up", noremap = true, silent = true });
+keymap.set("n", "<C-j>", "5<C-e>", { desc = "Scrolling down", noremap = true, silent = true })
+keymap.set("n", "<C-k>", "5<C-y>", { desc = "Scrolling up", noremap = true, silent = true })
 
-
-keymap.set('v', '<Leader>c-c', '<Plug>(comment_toggle_linewise_visual)')
+keymap.set("v", "<Leader>c-c", "<Plug>(comment_toggle_linewise_visual)")
 
 -- Remove unused keymap
 keymap.del("n", "<leader>E") -- Explorer Neo-tree (cwd)
@@ -75,6 +72,24 @@ keymap.del("n", "<leader>gb")
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+keymap.set("n", "<Leader><space>", function()
+  require("telescope.builtin").find_files({
+    sorting_strategy = "ascending",
+    path_display = { "smart" }, -- Show shortened paths
+    follow = true, -- Follow symlinks
+  })
+end, { desc = "Find files with file names prioritized", noremap = true, silent = true })
+
+keymap.set("n", "<Leader>ff", function()
+    local builtin = require("telescope.builtin")
+    builtin.find_files({
+        no_ignore = false,
+        hidden = true,
+        sorting_strategy = "ascending",
+        path_display = { "smart" }, -- Show shortened paths
+        follow = true, -- Follow symlinks
+    })
+end, { desc = "Find files with file names hidden file", noremap = true, silent = true })
 
 
 -- keymap.set("n", "<Leader><space>", function()
@@ -84,4 +99,3 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 --     follow = true, -- Follow symlinks
 --   })
 -- end, { desc = "Find files with file names prioritized", noremap = true, silent = true })
-
