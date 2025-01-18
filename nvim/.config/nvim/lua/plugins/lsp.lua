@@ -79,10 +79,6 @@ return {
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
       })
-      -- zig
-      lspconfig.zls.setup({
-        capabilities = capabilities,
-      })
       -- yaml
       lspconfig.yamlls.setup({
         capabilities = capabilities,
