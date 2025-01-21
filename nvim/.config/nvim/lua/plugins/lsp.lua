@@ -89,22 +89,7 @@ return {
       })
       -- python
       lspconfig.pyright.setup({ capabilities = capabilities })
-      --java
-      lspconfig.jdtls.setup({
-        settings = {
-          java = {
-            configuration = {
-              runtimes = {
-                {
-                  name = "JavaSE-17",
-                  path = "/opt/jdk-17",
-                  default = true,
-                },
-              },
-            },
-          },
-        },
-      })
+
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})

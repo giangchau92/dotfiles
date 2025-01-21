@@ -10,6 +10,7 @@ return {
   { "nvim-neotest/nvim-nio" },
   {
     "mfussenegger/nvim-dap",
+    commit = "7ff6936010b7222fea2caea0f67ed77f1b7c60dd",
     config = function()
       local dap = require("dap")
 
@@ -22,6 +23,13 @@ return {
           "Dap" .. name,
           { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
         )
+      end
+
+      -- setup dap config by VsCode launch.json file
+      local vscode = require("dap.ext.vscode")
+      local json = require("plenary.json")
+      vscode.json_decode = function(str)
+        return vim.json.decode(json.json_strip_comments(str))
       end
 
       for _, language in ipairs(js_based_languages) do
@@ -77,8 +85,36 @@ return {
           },
         }
       end
+      local dapui = require("dapui")
+      dapui.setup()
+      -- Tự động mở giao diện DAP khi bắt đầu debug
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+
+      -- Tự động đóng khi debug kết thúc
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
     end,
     keys = {
+      {
+        "<leader>db",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "DAP: Toggle Breakpoint",
+      },
+      {
+        "<leader>dB",
+        function()
+          require("dap").clear_breakpoints()
+        end,
+        desc = "DAP: Clear Breakpoints",
+      },
       {
         "<leader>dO",
         function()
@@ -96,21 +132,53 @@ return {
       {
         "<leader>da",
         function()
-          if vim.fn.filereadable(".vscode/launch.json") then
-            local dap_vscode = require("dap.ext.vscode")
-            dap_vscode.load_launchjs(nil, {
-              ["node"] = js_based_languages,
-              ["pwa-node"] = js_based_languages,
-              ["chrome"] = js_based_languages,
-              ["pwa-chrome"] = js_based_languages,
-            })
-          end
+          -- if vim.fn.filereadable(".vscode/launch.json") then
+          --   local dap_vscode = require("dap.ext.vscode")
+          --   dap_vscode.load_launchjs(nil, {
+          --     ["node"] = js_based_languages,
+          --     ["pwa-node"] = js_based_languages,
+          --     ["chrome"] = js_based_languages,
+          --     ["pwa-chrome"] = js_based_languages,
+          --     ["node-terminals"] = js_based_languages,
+          --   })
+          -- end
           require("dap").continue()
         end,
         desc = "Run with Args",
       },
+      {
+        "<leader>dB",
+        function()
+          require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+        end,
+        desc = "Breakpoint Condition",
+      },
+      {
+        "<leader>db",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Toggle Breakpoint",
+      },
+      {
+        "<leader>dq",
+        function()
+          require("dap").terminate()
+          require("dapui").close()
+        end,
+        desc = "DAP: Close Session",
+      },
     },
     dependencies = {
+      { "jay-babu/mason-nvim-dap.nvim" },
+      {
+        "rcarriga/nvim-dap-ui",
+      },
+      {
+        "theHamsta/nvim-dap-virtual-text",
+        opts = {},
+      },
+
       -- Install the vscode-js-debug adapter
       {
         "microsoft/vscode-js-debug",
@@ -152,6 +220,10 @@ return {
             -- log_console_level = vim.log.levels.ERROR,
           })
         end,
+      },
+      {
+        "Joakker/lua-json5",
+        build = "./install.sh",
       },
     },
   },
