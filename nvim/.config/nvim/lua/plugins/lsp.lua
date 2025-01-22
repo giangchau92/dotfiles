@@ -16,7 +16,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     enabled = true,
-    config = function()
+    --[[ config = function()
       local cmp = require("cmp")
 
       cmp.setup({
@@ -49,7 +49,7 @@ return {
           { name = "ts_ls" },
         }),
       })
-    end,
+    end, ]]
   },
   {
     "neovim/nvim-lspconfig",
