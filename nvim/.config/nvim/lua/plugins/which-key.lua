@@ -30,7 +30,6 @@ return {
 			{ "<leader>qt", "<cmd>TodoTelescope<cr>", desc = "Show TODOs" },
 
 			{ "<leader>s", group = "Search" },
-			{ "<leader>sS", "<cmd>Telescope symbols<cr>", desc = "Search symbols" },
 			{ "<leader>sc", "<cmd>Telescope commands<cr>", desc = "Commands" },
 			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Find Help" },
 			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
