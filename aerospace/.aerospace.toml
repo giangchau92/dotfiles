@@ -143,7 +143,7 @@ run = 'move-node-to-workspace U'
 
 [[on-window-detected]]
 if.app-id = 'com.unity3d.unityhub'
-run = 'move-node-to-workspace A'
+run = 'move-node-to-workspace V'
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.rider'
@@ -163,10 +163,6 @@ run = 'move-node-to-workspace D'
 
 [[on-window-detected]]
 if.app-id = 'com.DanPristupov.Fork'
-run = 'move-node-to-workspace V'
-
-[[on-window-detected]]
-if.app-id = 'com.unity3d.unityhub'
 run = 'move-node-to-workspace V'
 
 
