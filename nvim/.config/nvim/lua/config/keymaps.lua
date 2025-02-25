@@ -18,10 +18,10 @@ keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
 -- Move window
-keymap.set("n", "sh", "<C-w>h")
-keymap.set("n", "sk", "<C-w>k")
-keymap.set("n", "sj", "<C-w>j")
-keymap.set("n", "sl", "<C-w>l")
+keymap.set("n", "<C-h>", "<C-w>h")
+keymap.set("n", "<C-k>", "<C-w>k") -- not working?
+keymap.set("n", "<C-j>", "<C-w>j")
+keymap.set("n", "<C-l>", "<C-w>l")
 
 keymap.set("v", "<C-c>", '"+y') -- Copy
 keymap.set("v", "<D-x>", '"+x') -- Copy
@@ -52,8 +52,8 @@ keymap.set("n", "<C-[>", "<C-o>", opts)
 keymap.set("n", "<C-d>", vim.lsp.buf.definition, { desc = "Go to definition", noremap = true, silent = true })
 
 -- Scrolling
-keymap.set("n", "<C-j>", "5<C-e>", { desc = "Scrolling down", noremap = true, silent = true })
-keymap.set("n", "<C-k>", "5<C-y>", { desc = "Scrolling up", noremap = true, silent = true })
+keymap.set("n", "<C-]>", "5<C-e>", { desc = "Scrolling down", noremap = true, silent = true })
+keymap.set("n", "<C-[>", "5<C-y>", { desc = "Scrolling up", noremap = true, silent = true })
 
 keymap.set("v", "<Leader>c-c", "<Plug>(comment_toggle_linewise_visual)")
 
@@ -67,11 +67,36 @@ keymap.del("n", "<leader>.") -- Scratch buffer toggle
 keymap.del("n", "<leader>`")
 keymap.del("n", "<leader>cm")
 keymap.del("n", "<leader>gb")
-
+keymap.del("n", "<leader>sa")
+keymap.del("n", "<leader>sD")
+keymap.del("n", "<leader>sc")
+keymap.del("n", "<leader>sC")
+keymap.del("n", "<leader>l")
+keymap.del("n", "<leader>sh")
+keymap.del("n", "<leader>sH")
+keymap.del("n", "<leader>sk")
+keymap.del("n", "<leader>sR")
+keymap.del("n", "<leader>sG")
+keymap.del("n", "<leader>sl")
+keymap.del("n", "<leader>sM")
+keymap.del("n", "<leader>s\"")
+keymap.del("n", "<leader>S")
+-- git
+keymap.del("n", "<leader>gB")
+keymap.del("n", "<leader>gc")
+keymap.del("n", "<leader>ge")
+keymap.del("n", "<leader>gf")
+keymap.del("n", "<leader>gg")
+keymap.del("n", "<leader>gG")
+keymap.del("n", "<leader>gl")
+keymap.del("n", "<leader>gL")
+keymap.del("n", "<leader>gs")
+keymap.del("n", "<leader>gY")
 -- move selected lines
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+--[[
 keymap.set("n", "<Leader><space>", function()
   require("telescope.builtin").find_files({
     sorting_strategy = "ascending",
@@ -99,3 +124,4 @@ end, { desc = "Find files with file names hidden file", noremap = true, silent =
 --     follow = true, -- Follow symlinks
 --   })
 -- end, { desc = "Find files with file names prioritized", noremap = true, silent = true })
+]]
