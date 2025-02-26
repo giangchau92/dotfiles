@@ -14,7 +14,7 @@ return {
         function()
           require("telescope.builtin").lsp_document_symbols({
             symbols = LazyVim.config.get_kind_filter(),
-            -- sorting_strategy = "ascending", -- Display symbols top-to-bottom as they appear in the file
+            sorting_strategy = "ascending", -- Display symbols top-to-bottom as they appear in the file
           })
         end,
         desc = "Go to LSP symbol",

@@ -153,7 +153,11 @@ return {
         {
             "<leader>bs",
             function()
-                require('fzf-lua').lsp_document_symbols()
+                vim.notify("Open document symbols", vim.log.levels.INFO)
+                require('fzf-lua').lsp_document_symbols({
+                    symbols = LazyVim.config.get_kind_filter(),
+                    sorting_strategy = "ascending", -- Display symbols top-to-bottom as they appear in the file
+                })
             end,
             desc = "Buffer [S]ymbols",
             noremap = true,
@@ -234,6 +238,8 @@ return {
     },
     opts = {
         winopts = {
+            height = 0.9,
+            width = 0.9,
             preview = { default = "bat" },
             on_create = function()
                 -- called once upon creation of the fzf main window
@@ -242,9 +248,15 @@ return {
             end,
         },
         files = {
-            prompt = 'Files ❯ ',
+            prompt = ' ❯ ',
             file_icons = false,
             multiprocess = true,
+        },
+        keymap = {
+            fzf = {
+                ["shift-left"]       = "first",
+                ["shift-right"]       = "last",
+            },
         },
     },
     config = function(_, opts)
