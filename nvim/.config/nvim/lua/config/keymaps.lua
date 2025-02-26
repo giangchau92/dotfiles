@@ -54,6 +54,7 @@ keymap.set("n", "<C-d>", vim.lsp.buf.definition, { desc = "Go to definition", no
 -- Scrolling
 keymap.set("n", "<C-]>", "5<C-e>", { desc = "Scrolling down", noremap = true, silent = true })
 keymap.set("n", "<C-[>", "5<C-y>", { desc = "Scrolling up", noremap = true, silent = true })
+-- keymap.set("n", "<Esc>", "5<C-y>", { desc = "Scrolling up", noremap = true, silent = true })
 
 keymap.set("v", "<Leader>c-c", "<Plug>(comment_toggle_linewise_visual)")
 
