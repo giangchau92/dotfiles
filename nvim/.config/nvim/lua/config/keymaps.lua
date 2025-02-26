@@ -46,7 +46,7 @@ keymap.set("n", "<C-w><down>", "<C-w>-")
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
 -- Go back
-keymap.set("n", "<C-[>", "<C-o>", opts)
+-- keymap.set("n", "<C-[>", "<C-o>", opts)
 
 -- Go to definition
 keymap.set("n", "<C-d>", vim.lsp.buf.definition, { desc = "Go to definition", noremap = true, silent = true })
