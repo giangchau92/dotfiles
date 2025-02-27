@@ -1,7 +1,7 @@
 theme = "catppuccin-mocha"
 font-family = "FiraCode Nerd Font Mono Medium"
 font-size = 14
-background-opacity = 0.96
+background-opacity = 0.75
 background-blur-radius = 70
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = hidden
@@ -12,3 +12,5 @@ adjust-cursor-thickness = 5
 
 keybind = cmd+c=text:\x03
 
+# macOS-specific settings
+macos-option-as-alt = true
